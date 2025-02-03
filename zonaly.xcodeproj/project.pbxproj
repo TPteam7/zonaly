@@ -6,6 +6,10 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		555B19E72D517E9A003D8AFC /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 555B19E62D517E91003D8AFC /* README.md */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXContainerItemProxy section */
 		55CD86BE2D49FBD4003A88D8 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -24,6 +28,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		555B19E62D517E91003D8AFC /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		55CD86A82D49FBD3003A88D8 /* zonaly.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = zonaly.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		55CD86BD2D49FBD4003A88D8 /* zonalyTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = zonalyTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		55CD86C72D49FBD4003A88D8 /* zonalyUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = zonalyUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -75,6 +80,7 @@
 		55CD869F2D49FBD3003A88D8 = {
 			isa = PBXGroup;
 			children = (
+				555B19E62D517E91003D8AFC /* README.md */,
 				55CD86AA2D49FBD3003A88D8 /* zonaly */,
 				55CD86C02D49FBD4003A88D8 /* zonalyTests */,
 				55CD86CA2D49FBD4003A88D8 /* zonalyUITests */,
@@ -212,6 +218,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				555B19E72D517E9A003D8AFC /* README.md in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

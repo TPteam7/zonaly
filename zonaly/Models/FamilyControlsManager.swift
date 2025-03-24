@@ -22,31 +22,17 @@ class FamilyControlsManager: ObservableObject {
     
     /// **Apply App & Category Restrictions**
     func applyRestrictions() {
-        print("🔹 Applying Restrictions...")
-
         store.shield.applications = selectedApps.applicationTokens
-        print("✅ Apps Blocked: \(selectedApps.applicationTokens)")
 
-        // Debugging: Print category tokens before applying restrictions
-        print("🔹 Category Tokens: \(selectedApps.categoryTokens)")
-
-        if !selectedApps.categoryTokens.isEmpty {
-            let categorySet = Set<ActivityCategoryToken>(selectedApps.categoryTokens)
-            store.shield.applicationCategories = .specific(categorySet) // Explicit cast
-            print("✅ Applied Category Restrictions: \(categorySet)")
-        } else {
-            store.shield.applicationCategories = .all()
-            print("⚠️ No Category Selected: Allowing all")
-        }
+        let categorySet = Set<ActivityCategoryToken>(selectedApps.categoryTokens)
+        store.shield.applicationCategories = .specific(categorySet, except: []) // Explicit cast
     }
 
     
     /// **Remove All Restrictions**
     func removeRestrictions() {
         store.shield.applications = [] // Unblock all apps
-        store.shield.applicationCategories = ShieldSettings.ActivityCategoryPolicy<Application>.none // Unblock all categories
-
-        print("✅ Unblocked all apps and categories")
+        store.shield.applicationCategories = .none // Unblock all categories
     }
     
     /// **Update Selection**

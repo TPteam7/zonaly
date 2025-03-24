@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		555B19E72D517E9A003D8AFC /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 555B19E62D517E91003D8AFC /* README.md */; };
+		55F6B4AE2D7B5B8600F07635 /* Video.txt in Resources */ = {isa = PBXBuildFile; fileRef = 55F6B4AD2D7B5B7F00F07635 /* Video.txt */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -32,6 +33,7 @@
 		55CD86A82D49FBD3003A88D8 /* zonaly.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = zonaly.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		55CD86BD2D49FBD4003A88D8 /* zonalyTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = zonalyTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		55CD86C72D49FBD4003A88D8 /* zonalyUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = zonalyUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		55F6B4AD2D7B5B7F00F07635 /* Video.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = Video.txt; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
@@ -98,6 +100,7 @@
 				55CD86C02D49FBD4003A88D8 /* zonalyTests */,
 				55CD86CA2D49FBD4003A88D8 /* zonalyUITests */,
 				55CD86A92D49FBD3003A88D8 /* Products */,
+				55F6B4AD2D7B5B7F00F07635 /* Video.txt */,
 			);
 			sourceTree = "<group>";
 		};
@@ -231,6 +234,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				55F6B4AE2D7B5B8600F07635 /* Video.txt in Resources */,
 				555B19E72D517E9A003D8AFC /* README.md in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -31,6 +31,7 @@ class FamilyControlsManager: ObservableObject {
     
     /// **Remove All Restrictions**
     func removeRestrictions() {
+        print("Removing Restrictions")
         store.shield.applications = [] // Unblock all apps
         store.shield.applicationCategories = .none // Unblock all categories
     }

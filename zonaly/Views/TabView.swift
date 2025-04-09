@@ -4,33 +4,41 @@ struct MainTabView: View {
     @State private var selectedTab: Tab = .home
 
     var body: some View {
-        ZStack(alignment: .bottom) {
+        VStack(spacing: 0) {
             ZStack {
-                if selectedTab == .home {
+                switch selectedTab {
+                case .home:
                     HomeView(selectedTab: $selectedTab)
                         .transition(.opacity)
-                }
-                if selectedTab == .map {
+                case .map:
                     LocationPickerView()
                         .transition(.opacity)
-                }
-                if selectedTab == .settings {
+                case .settings:
                     SettingsView()
                         .transition(.opacity)
                 }
             }
             .animation(.easeInOut(duration: 0.3), value: selectedTab)
             .frame(maxWidth: .infinity, maxHeight: .infinity)
-            .ignoresSafeArea()
 
             CustomTabBar(selectedTab: $selectedTab)
+                .padding(.bottom, safeAreaInsetBottom)
+                .background(Color.mediumBlue)
         }
+        .edgesIgnoringSafeArea(.bottom)
     }
 }
-
 
 enum Tab: String, CaseIterable {
     case home = "house.fill"
     case map = "globe"
     case settings = "gearshape.fill"
+
+    var index: Int {
+        switch self {
+        case .home: return 0
+        case .map: return 1
+        case .settings: return 2
+        }
+    }
 }

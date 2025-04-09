@@ -1,10 +1,3 @@
-//
-//  SettingsView.swift
-//  zonaly
-//
-//  Created by Trevor Pope on 3/22/25.
-//
-
 import SwiftUI
 
 struct SettingsView: View {
@@ -13,7 +6,15 @@ struct SettingsView: View {
     @AppStorage("locationTracking") private var locationTracking: Bool = true
 
     var body: some View {
-        NavigationView {
+        VStack(alignment: .leading, spacing: 0) {
+            // Custom full-width title
+            Text("Settings")
+                .font(.largeTitle).bold()
+                .padding(.horizontal)
+                .padding(.top, 24)
+                .padding(.bottom, 8)
+
+            // The actual settings form
             Form {
                 Section(header: Text("Account")) {
                     TextField("Name", text: $userName)
@@ -37,14 +38,14 @@ struct SettingsView: View {
 
                 Section {
                     Button(role: .destructive) {
-                        // Handle logout or reset
                         print("Logging out...")
                     } label: {
                         Text("Log Out")
                     }
                 }
             }
-            .navigationTitle("Settings")
+            .scrollContentBackground(.hidden) // hides gray background
         }
+        .background(Color(.systemBackground)) // makes background match
     }
 }

@@ -21,13 +21,18 @@ struct RoundedButton: View {
 
     var body: some View {
         Button(action: action) {
-            Text(title)
-                .fontWeight(.bold)
-                .foregroundColor(.black)
-                .padding(.vertical, 14)
-                .frame(maxWidth: .infinity)
-                .background(color)
-                .cornerRadius(15)
+            VStack(alignment: .leading) {
+                Text(title)
+                    .fontWeight(.bold)
+                    .foregroundColor(.black)
+                    .frame(maxWidth: .infinity, alignment: .topLeading)
+                Spacer()
+            }
+            .padding()
+            .frame(height: 80) // Adjust the height as needed
+            .background(color)
+            .cornerRadius(15)
         }
     }
 }
+

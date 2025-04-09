@@ -38,32 +38,6 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
         locationManager.stopUpdatingLocation()
     }
 
-    // MARK: - Region Monitoring
-
-    func setRegionCenter(latitude: Double, longitude: Double) {
-        self.regionCenter = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
-    }
-
-    func setRegionRadius(_ radius: CLLocationDistance) {
-        self.regionRadius = radius
-    }
-
-    func isInsideRegion(userLocation: CLLocation) -> Bool {
-        guard let center = regionCenter else { return false }
-        let centerLocation = CLLocation(latitude: center.latitude, longitude: center.longitude)
-        return userLocation.distance(from: centerLocation) <= regionRadius
-    }
-
-    private func handleRegionCheck(for userLocation: CLLocation) {
-        if isInsideRegion(userLocation: userLocation) {
-            print("✅ User inside region, applying restrictions.")
-            FamilyControlsManager.shared.applyRestrictions()
-        } else {
-            print("❌ User outside region, removing restrictions.")
-            FamilyControlsManager.shared.removeRestrictions()
-        }
-    }
-
     // MARK: - CLLocationManagerDelegate
 
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
@@ -88,10 +62,15 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
             // 🚀 Ensure UI Recognizes Change
             self.userLocation = CLLocation(latitude: latestLocation.coordinate.latitude,
                                            longitude: latestLocation.coordinate.longitude)
-            
-            // 🔥 Call handleRegionCheck to apply/remove restrictions
-            self.handleRegionCheck(for: latestLocation)
 
+            // 🔥 Broadcast location update
+            NotificationCenter.default.post(name: .didUpdateUserLocation, object: latestLocation)
         }
     }
+}
+
+import Foundation
+
+extension Notification.Name {
+    static let didUpdateUserLocation = Notification.Name("didUpdateUserLocation")
 }

@@ -1,43 +1,59 @@
-
 import SwiftUI
 import FamilyControls
 
 struct AppSelectionView: View {
-    @State var selection = FamilyActivitySelection()
-    
-    var body: some View {
-        VStack {
-            FamilyActivityPicker(selection: $selection)
-                .onChange(of: selection) { oldSelection, newSelection in
-                    FamilyControlsManager.shared.updateSelection(newSelection)
-                    saveSelection(newSelection) // Save to persist selection
-                }
-                .onAppear {
-                    loadSelection() // Load saved selection on view load
-                }
+    @Environment(\.dismiss) private var dismiss
+    @State var selection: FamilyActivitySelection
+    var clearOnAppear: Bool = false
 
-            Button("Save Selections") {
-                FamilyControlsManager.shared.applyRestrictions()
+    init(initialSelection: FamilyActivitySelection? = nil, clearOnAppear: Bool = false) {
+        _selection = State(initialValue: initialSelection ?? FamilyActivitySelection())
+        self.clearOnAppear = clearOnAppear
+    }
+
+    var body: some View {
+        NavigationView {
+            VStack(spacing: 16) {
+                FamilyActivityPicker(selection: $selection)
+                    .onChange(of: selection) { _, newSelection in
+                        DispatchQueue.main.async {
+                            FamilyControlsManager.shared.updateSelection(newSelection)
+                            saveSelection(newSelection)
+                        }
+                    }
+                    .onAppear {
+                        DispatchQueue.main.async {
+                            if clearOnAppear {
+                                selection = FamilyActivitySelection()
+                                saveSelection(selection)
+                            }
+                        }
+                    }
+
+                Button("Save Selections & Close") {
+                    FamilyControlsManager.shared.applyRestrictions()
+                    dismiss()
+                }
+                .padding()
+                .frame(maxWidth: .infinity)
+                .background(Color.blue)
+                .foregroundColor(.white)
+                .cornerRadius(10)
+                .padding(.horizontal)
             }
-            .padding()
-            .background(Color.blue)
-            .foregroundColor(.white)
-            .cornerRadius(10)
+            .navigationTitle("Select Apps")
+            .navigationBarTitleDisplayMode(.inline)
+            .toolbar {
+                ToolbarItem(placement: .cancellationAction) {
+                    Button("Cancel") { dismiss() }
+                }
+            }
         }
     }
 
-    // Function to save selection
     private func saveSelection(_ selection: FamilyActivitySelection) {
         if let data = try? JSONEncoder().encode(selection) {
             UserDefaults.standard.set(data, forKey: "savedSelection")
-        }
-    }
-
-    // Function to load selection
-    private func loadSelection() {
-        if let data = UserDefaults.standard.data(forKey: "savedSelection"),
-           let savedSelection = try? JSONDecoder().decode(FamilyActivitySelection.self, from: data) {
-            selection = savedSelection
         }
     }
 }
